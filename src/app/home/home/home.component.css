@@ -1,0 +1,16 @@
+/* home.component.css */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: justify;
+}
+
+h1 {
+  color: #333;
+}
+
+p {
+  color: #666;
+  line-height: 1.5;
+}
