@@ -1,0 +1,75 @@
+<!-- lista-pessoas.component.html -->
+<div class="container mt-4">
+  <h2>Lista de Pessoas</h2>
+  
+  <button class="btn btn-success mt-3 btn-incluir" (click)="addPessoa()">
+    <i class="fas fa-plus"></i> Incluir Pessoa
+  </button>
+  <ul class="list-group">
+    <li *ngFor="let pessoa of pessoas" class="list-group-item">
+      <div class="d-flex align-items-start">
+        <div>
+          <div class="btn-group" role="group">
+            <button class="btn btn-primary btn-sm" (click)="editPessoa(pessoa)">
+              <i class="fas fa-edit mr-2"></i>
+            </button>
+            <button class="btn btn-danger btn-sm ml-2" (click)="deletePessoa(pessoa.idpessoas)">
+              <i class="fas fa-trash-alt mr-2"></i>
+            </button>
+          </div>
+        </div>
+        <div class="ml-3 w-100 dados">
+          <div class="row">
+            <div class="col">
+              <h4>{{ pessoa.nome }}</h4>
+            </div>
+            <div class="col">
+              <p><strong>Sexo:</strong> {{ pessoa.sexo }}</p>
+            </div>
+            <div class="col">
+              <p><strong>Data de Nascimento:</strong> {{ pessoa.dtNascimento | date:"dd/MM/yyyy":"+0000" }}</p>
+            </div>
+            <div class="col">
+              <p><strong>Estado Civil:</strong> {{ pessoa.estadoCivil }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p><strong>Idade:</strong> {{ calcularIdade(pessoa.dtNascimento) }} anos</p>
+            </div>
+            <div class="col">
+              <p><strong>Dias até o próximo aniversário:</strong> {{ diasAteProximoAniversario(pessoa.dtNascimento) }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <!-- Verificação se é o dia de aniversário -->
+              <div *ngIf="isAniversario(pessoa.dtNascimento, pessoa.nome)" class="alert alert-success" role="alert">
+                Parabéns! Hoje é o aniversário de {{ pessoa.nome }}!
+              </div>
+            </div>
+          </div>
+          <div *ngIf="pessoa.showAddress">
+            <h5>Endereços:</h5>
+            <ul class="list-unstyled">
+              <li *ngFor="let address of pessoa.enderecos">
+                <p><strong>CEP:</strong> {{ address.cep }}</p>
+                <p><strong>Endereço:</strong> {{ address.endereco }}</p>
+                <p><strong>Número:</strong> {{ address.numero }}</p>
+                <p><strong>Complemento:</strong> {{ address.complemento }}</p>
+                <p><strong>Bairro:</strong> {{ address.bairro }}</p>
+                <p><strong>Cidade:</strong> {{ address.cidade }}</p>
+                <p><strong>Estado:</strong> {{ address.estado }}</p>
+                <hr> <!-- Linha horizontal entre endereços -->
+              </li>
+            </ul>
+          </div>
+          <button class="btn btn-info" (click)="toggleAddress(pessoa)">
+            {{ pessoa.enderecos.length+' Endereços' }}
+            <i class="fas {{ pessoa.showAddress ? 'fa-eye-slash' : 'fa-eye' }} ml-1"></i> <!-- Ícone de olho cortado quando ocultar -->
+          </button>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

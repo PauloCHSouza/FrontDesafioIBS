@@ -1,0 +1,28 @@
+.list-group-item {
+  padding: 15px;
+}
+
+.list-group-item h4,
+.list-group-item h5 {
+  margin-bottom: 5px;
+}
+
+.list-group-item .btn {
+  padding: 0.3rem 0.5rem;
+}
+
+.list-group-item .address {
+  margin-left: 20px;
+}
+
+.list-group-item .address p {
+  margin: 5px 0;
+}
+
+.dados {
+    margin-left: 2em;
+}
+
+.btn-incluir {
+  margin-bottom: 2em;
+}

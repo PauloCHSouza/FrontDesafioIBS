@@ -1,0 +1,106 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">Adicionar/Editar Pessoa</h4>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="pessoaForm" (ngSubmit)="addPessoa()">
+    <div class="form-group">
+      <label for="nome">Nome:</label>
+      <input type="text" class="form-control" id="nome" formControlName="nome" placeholder="Nome">
+      <div *ngIf="pessoaForm.get('nome')!.invalid && pessoaForm.get('nome')!.touched" class="text-danger">
+        Nome é obrigatório
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="sexo">Sexo:</label>
+      <select class="form-control" id="sexo" formControlName="sexo">
+        <option value="">Selecione...</option>
+        <option value="Masculino">Masculino</option>
+        <option value="Feminino">Feminino</option>
+      </select>
+      <div *ngIf="pessoaForm.get('sexo')!.invalid && pessoaForm.get('sexo')!.touched" class="text-danger">
+        Sexo é obrigatório
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="dtNascimento">Data de Nascimento:</label>
+      <input type="date" class="form-control" id="dtNascimento" formControlName="dtNascimento">
+      <div *ngIf="pessoaForm.get('dtNascimento')!.invalid && pessoaForm.get('dtNascimento')!.touched" class="text-danger">
+        Data de nascimento é obrigatório
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="estadoCivil">Estado Civil:</label>
+      <select class="form-control" id="estadoCivil" formControlName="estadoCivil">
+        <option value="">Selecione...</option>
+        <option value="Solteiro(a)">Solteiro(a)</option>
+        <option value="Casado(a)">Casado(a)</option>
+        <option value="Divorciado(a)">Divorciado(a)</option>
+        <option value="Viúvo(a)">Viúvo(a)</option>
+      </select>
+      <div *ngIf="pessoaForm.get('estadoCivil')!.invalid && pessoaForm.get('estadoCivil')!.touched" class="text-danger">
+        Estado civil é obrigatório
+      </div>
+    </div>
+    
+    <div formArrayName="enderecos">
+      <div *ngFor="let enderecoGroup of enderecos.controls; let i = index" [formGroupName]="i">
+        <hr>
+        <h4>Endereço {{i+1}}</h4>
+        <div class="form-group">
+          <label for="cep">CEP:</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="cep" formControlName="cep" mask="00000-000">
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="button" (click)="buscarEndereco(i)">
+                Buscar
+              </button>
+            </div>
+          </div>
+        </div>
+          
+        <div class="popup-container" *ngIf="showPopup">
+          <div class="popup">
+            <p>{{ errorMessage }}</p>
+            <button class="btn btn-primary" (click)="closePopup()">Fechar</button>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="endereco">Endereço:</label>
+          <input type="text" class="form-control" id="endereco" formControlName="endereco">
+        </div>
+        <div class="form-group">
+          <label for="numero">Número:</label>
+          <input type="text" class="form-control" id="numero" formControlName="numero">
+        </div>
+        <div class="form-group">
+          <label for="complemento">Complemento:</label>
+          <input type="text" class="form-control" id="complemento" formControlName="complemento">
+        </div>
+        <div class="form-group">
+          <label for="bairro">Bairro:</label>
+          <input type="text" class="form-control" id="bairro" formControlName="bairro">
+        </div>
+        <div class="form-group">
+          <label for="cidade">Cidade:</label>
+          <input type="text" class="form-control" id="cidade" formControlName="cidade">
+        </div>
+        <div class="form-group">
+          <label for="estado">Estado:</label>
+          <input type="text" class="form-control" id="estado" formControlName="estado">
+        </div>
+        <button type="button" class="btn btn-danger remover" (click)="removeEndereco(i)">Remover Endereço</button>
+      </div>
+    </div>
+    
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="addEndereco()">Adicionar Endereço</button>
+      <button type="submit" class="btn btn-success" (click)="addPessoa()">{{ pessoa ? 'Editar' : 'Adicionar' }} Pessoa</button>
+      <button type="button" class="btn btn-secondary" (click)="close()">Fechar</button>
+    </div>
+  </form>
+</div>
