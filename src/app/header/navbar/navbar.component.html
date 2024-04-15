@@ -1,25 +1,28 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Desafio IBS</a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" routerLink="" routerLinkActive="active" ariaCurrentWhenActive="page">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="nav-link" routerLink="/" aria-current="page">Home</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/pessoas" routerLinkActive="active" ariaCurrentWhenActive="page">Pessoas</a>
-    </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/pessoas">Pessoas</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto"> <!-- Adicionado ml-auto para alinhar à direita -->
+      <li class="nav-item" *ngIf="isLoggedIn(); else showLogin">
+        <a class="nav-link" (click)="logout()">Logout</a>
+      </li>
+      <ng-template #showLogin>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">Logar</a>
+        </li>
+      </ng-template>
     </ul>
   </div>
 </nav>
