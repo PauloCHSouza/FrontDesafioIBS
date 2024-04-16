@@ -20,8 +20,6 @@ export class LoginComponent {
   onSubmit(): void {
     this.authService.login(this.loginData)
       .subscribe(() => {
-        console.log('aqui');
-        
         this.router.navigate(['/pessoas']);
       }, error => {
         console.error('Erro de login:', error);

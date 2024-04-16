@@ -15,7 +15,7 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/login`, credentials)
       .pipe(
         tap((response) => {
-          this.setToken(response.token);
+          this.setToken(response.access_token.access_token);
         }),
         catchError(error => {
           throw error;
