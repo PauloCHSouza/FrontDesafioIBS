@@ -53,14 +53,10 @@ export class ListaComponent {
   isAniversario(dataNascimento: string, nome: string): boolean {
     const today = new Date();
     const birthDate = new Date(dataNascimento);
+
+    birthDate.setHours(birthDate.getHours() + 3);
   
-    const birthDateUTC = new Date(
-        Date.UTC(birthDate.getUTCFullYear(), birthDate.getUTCMonth(), birthDate.getUTCDate())
-    );
-  
-    birthDateUTC.setUTCHours(0, 0, 0, 0);
-  
-    const isSameMonthAndDay = today.getUTCMonth() === birthDateUTC.getUTCMonth() && today.getUTCDate() === birthDateUTC.getUTCDate();
+    const isSameMonthAndDay = today.getMonth() === birthDate.getMonth() && today.getDate() === birthDate.getDate();
   
     return isSameMonthAndDay;
   }
