@@ -11,11 +11,11 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(credentials: { login: string, senha: string }): Observable<any> {
+  login(credentials: { login: string, password: string }): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, credentials)
       .pipe(
         tap((response) => {
-          this.setToken(response.access_token.access_token);
+          this.setToken(response.token);
         }),
         catchError(error => {
           throw error;

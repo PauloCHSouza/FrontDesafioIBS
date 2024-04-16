@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule, NgbModule, FormsModule ],
 })
 export class LoginComponent {
-  loginData = { login: '', senha: '' };
+  loginData = { login: '', password: '' };
 
   constructor(private authService: AuthService, private router: Router) {}
 
